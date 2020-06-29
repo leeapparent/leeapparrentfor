@@ -14,6 +14,7 @@ Vue.use(VueRouter)
     children:[
       {path:'/categories/create',component: CategoriesCreate},
       {path:'/categories/list',component: CategoriesList},
+      {path:'/categories/edit/:id',component: CategoriesCreate, props: true},
     ]
   }
 ]

@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
 import CategoriesCreate from '../views/categoriesCreate.vue'
 import CategoriesList from '../views/categoriesList.vue'
+import itemsList from '../views/itemsList.vue'
+import itemsCreate from '../views/itemsCreate.vue'
+
 
 Vue.use(VueRouter)
 
@@ -15,6 +18,12 @@ Vue.use(VueRouter)
       {path:'/categories/create',component: CategoriesCreate},
       {path:'/categories/list',component: CategoriesList},
       {path:'/categories/edit/:id',component: CategoriesCreate, props: true},
+
+      
+      {path:'/items/create',component: itemsCreate},
+      {path:'/items/list',component: itemsList},
+      {path:'/items/edit/:id',component: itemsCreate, props: true},
+
     ]
   }
 ]

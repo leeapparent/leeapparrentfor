@@ -7,7 +7,15 @@
           <el-input v-model="form.name"></el-input>
         </el-form-item>
           <el-form-item label="图标">
-          <el-input v-model="form.icon"></el-input>
+          <el-upload
+   class="avatar-uploader"
+  :action="$http.defaults.baseURL + '/upload'"
+  :show-file-list="false"
+  :on-success="afterUpload">
+  <img v-if="form.icon" :src="form.icon" class="avatar">
+  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+</el-upload>
+
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -28,6 +36,11 @@ export default {
       }
     },
     methods: {
+      afterUpload(res) {
+        // console.log(res);
+        this.$set(this.form, 'icon', res.url)
+        this.form.icon = res.url
+      },
     async  onSubmit(){
       let res = res
       if (this.id) {
@@ -51,5 +64,27 @@ export default {
 </script>
 
 <style>
-
+ .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>

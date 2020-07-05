@@ -3,7 +3,11 @@
     <h1>分类列表</h1>
     <el-table :data="items" border stripe>
    <el-table-column label="物品名称" prop='name'></el-table-column>
-   <el-table-column label="物品图标"></el-table-column>
+   <el-table-column label="物品图标">
+    <template slot-scope="scope">
+      <img style="height:10rem" :src="scope.row.icon" alt="">
+    </template>
+   </el-table-column>
     <el-table-column
       fixed="right"
       label="操作"

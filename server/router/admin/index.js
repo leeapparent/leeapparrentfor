@@ -1,4 +1,7 @@
 const { populate } = require('../../models/categories')
+const jwt = require('jsonwebtoken')
+// http异常处理包
+const assert = require('http-assert')
 
 module.exports = app =>{
     const express = require('express')
@@ -15,8 +18,7 @@ module.exports = app =>{
         const model = await req.Model.create(req.body)
         res.send(model)
       })
-    router.get('/', async(req, res)=>{
-
+    router.get('/',async(req, res)=>{
         const items = await req.Model.find().populate('parent').limit(10)
         res.send(items)
       })
@@ -44,25 +46,32 @@ module.exports = app =>{
     })
 
     app.post('/admin/api/login', async(req,res)=>{
-      // res.send('1')
+     
       const {username, password} = req.body
-      const AdminUser = require('../../models/adminUser')
+      const AdminUser = require('../../models/AdminUsers')
       const user = await AdminUser.findOne({username}).select('+password')
-      if(!user){
-        return res.status(422).send({
-          message:'用户不存在'
-        })
-      }
+      assert(user, 422, '用户不存在')
+      // if(!user){
+      //   return res.status(422).send({
+      //     message:'用户不存在'
+      //   })
+      // }
     const isvad =  require('bcrypt').compareSync(password,user.password)
-    if(!isvad){
-      return res.status(422).send({
-        message:'密码不存在'
-      })
-    }
-      const jwt = require('jsonwebtoken')
+    assert(isvad, 422, '用户不存在')
+    // if(!isvad){
+    //   return res.status(422).send({
+    //     message:'密码不存在'
+    //   })
+    // }
       const token =  jwt.sign({
         id: user._id
       }, app.get('serct'))
       res.send({token})
+    })
+    // 错误处理
+    app.use(async(err,req,res,next)=>{
+      res.status(err.statusCode).send({
+        message: err.message
+      })
     })
 }

@@ -33,15 +33,15 @@ export default {
     async  onSubmit(){
       let res = res
       if (this.id) {
-                  res = await this.$http.put(`rest/adminuser/${this.id}`, this.form)
+                  res = await this.$http.put(`rest/adminusers/${this.id}`, this.form)
       } else {
-        res = await this.$http.post('rest/adminuser',this.form)
+        res = await this.$http.post('rest/adminusers',this.form)
       }
                 this.$router.push('/user/list')
                 this.$message.success('保存成功')
       },
       async fetch() {
-        const res = await this.$http.get(`rest/adminuser/${this.id}`)
+        const res = await this.$http.get(`rest/adminusers/${this.id}`)
        this.form = Object.assign({}, this.form, res.data)
       },
     },

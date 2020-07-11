@@ -30,7 +30,7 @@ export default {
   },
   methods:{
     async fetch () {
-      const res = await this.$http.get('rest/adminuser')
+      const res = await this.$http.get('rest/adminusers')
       this.items = res.data
     },
    async handleClick(row) {
@@ -39,7 +39,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then( () => {
-          this.$http.delete(`rest/adminuser/${row._id}`).then((res) =>{
+          this.$http.delete(`rest/adminusers/${row._id}`).then((res) =>{
             console.log(res.status  );
             
           if (res.status === 200) {

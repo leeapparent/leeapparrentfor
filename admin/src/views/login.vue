@@ -34,7 +34,7 @@ export default {
             localStorage.token = res.data.token
             this.$router.push('/')
             this.$message({
-                type:'succes',
+                type:'success',
                 message: '登录成功'
             })
         }

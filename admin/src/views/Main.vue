@@ -1,7 +1,7 @@
 <template>
     <el-container style="height: 100vh; border: 1px solid #eee">
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-            <el-menu :default-openeds="['1']" router>
+            <el-menu :default-openeds="['2']" router unique-opened>
                 <el-submenu index="1">
                     <template slot="title"><i class="el-icon-message"></i>内容管理</template>
                     <el-menu-item-group>
@@ -23,6 +23,19 @@
                         <template slot="title">文章</template>
                         <el-menu-item index="/articles/create">新建文章</el-menu-item>
                         <el-menu-item index="/articles/list">文章列表</el-menu-item>
+                    </el-menu-item-group>
+                      <el-menu-item-group>
+                        <template slot="title">广告</template>
+                        <el-menu-item index="/ad/create">新建广告</el-menu-item>
+                        <el-menu-item index="/ad/list">广告列表</el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+                <el-submenu index="2">
+                     <template slot="title"><i class="el-icon-message"></i>系统管理</template>
+                 <el-menu-item-group>
+                        <template slot="title">用户管理</template>
+                        <el-menu-item index="/user/create">新建用户</el-menu-item>
+                        <el-menu-item index="/user/list">用户列表</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
             </el-menu>

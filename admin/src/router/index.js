@@ -9,8 +9,14 @@ import itemsCreate from '../views/itemsCreate.vue'
 
 import HeroList from '../views/HeroList'
 import HeroCreate from '../views/HeroCreate '
+
 import ArticlesList from '../views/articlesList'
 import ArticlesCreate from '../views/articlesCreate '
+
+import AdList from '../views/AdList'
+import AdCreate from '../views/AdCreate '
+import UserList from '../views/UserList'
+import UserCreate from '../views/UserCreate'
 
 Vue.use(VueRouter)
 
@@ -39,6 +45,15 @@ Vue.use(VueRouter)
       {path:'/articles/create',component: ArticlesCreate},
       {path:'/articles/list',component: ArticlesList},
       {path:'/articles/edit/:id',component: ArticlesCreate, props: true},
+
+      {path:'/ad/create',component: AdCreate},
+      {path:'/ad/list',component: AdList},
+      {path:'/ad/edit/:id',component: AdCreate, props: true},
+
+      
+      {path:'/user/create',component: UserCreate},
+      {path:'/user/list',component: UserList},
+      {path:'/user/edit/:id',component: UserCreate, props: true},
     ]
   }
 ]

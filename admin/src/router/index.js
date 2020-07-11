@@ -18,9 +18,15 @@ import AdCreate from '../views/AdCreate '
 import UserList from '../views/UserList'
 import UserCreate from '../views/UserCreate'
 
+
+import Login from '../views/login'
 Vue.use(VueRouter)
 
   const routes = [
+    {
+      path: '/login',
+      name: 'login', component: Login
+    },
   {
     path: '/',
     name: 'Main',

@@ -16,7 +16,7 @@ module.exports = app =>{
         res.send(model)
       })
     router.get('/', async(req, res)=>{
-      
+
         const items = await req.Model.find().populate('parent').limit(10)
         res.send(items)
       })
@@ -41,5 +41,28 @@ module.exports = app =>{
       const file = req.file
       file.url = `http://localhost:3000/uploads/${file.filename}`
       res.send(file)
+    })
+
+    app.post('/admin/api/login', async(req,res)=>{
+      // res.send('1')
+      const {username, password} = req.body
+      const AdminUser = require('../../models/adminUser')
+      const user = await AdminUser.findOne({username}).select('+password')
+      if(!user){
+        return res.status(422).send({
+          message:'用户不存在'
+        })
+      }
+    const isvad =  require('bcrypt').compareSync(password,user.password)
+    if(!isvad){
+      return res.status(422).send({
+        message:'密码不存在'
+      })
+    }
+      const jwt = require('jsonwebtoken')
+      const token =  jwt.sign({
+        id: user._id
+      }, app.get('serct'))
+      res.send({token})
     })
 }
